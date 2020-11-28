@@ -22,12 +22,12 @@
         - STRAIGHT_LEGS, LIEDOWN, and PERPENDICULAR_LEGS are used to validate your calibraton.
         - RUN is used when you are finished calibrating, and are ready to run normal operations.
 */
-enum MODE {NOMINAL_PWM, STRAIGHT_LEGS, LIEDOWN, UP_LEGS, PERPENDICULAR_LEGS, RUN};
+enum MODE {NOMINAL_PWM, STRAIGHT_LEGS, LIEDOWN, PERPENDICULAR_LEGS, RUN};
 MODE spot_mode = RUN;
 
 bool ESTOPPED = false;
-int viewing_speed = 50; // theoretically deg/sec  //400
-int walking_speed = 1500; // doesn't really mean anything, theoretically deg/sec  //1500
+int viewing_speed = 400; // doesn't really mean anything, theoretically deg/sec
+int walking_speed = 1500; // doesn't really mean anything, theoretically deg/sec
 double last_estop = millis();
 static unsigned long prev_publish_time;
 const int ledPin = 13;
@@ -132,7 +132,7 @@ void command_servos(const LegJoints & legjoint, const bool & step_or_view = true
   (*Shoulders[leg]).SetGoal(Shoulder_angle, s_speed, step_or_view);
   (*Elbows[leg]).SetGoal(Elbow_angle, e_speed, step_or_view);
   (*Wrists[leg]).SetGoal(Wrist_angle, w_speed, step_or_view);
-  
+
 }
 
 void update_sensors()
@@ -166,7 +166,7 @@ void set_stance(const double & f_shoulder_stance = 0.0, const double & f_elbow_s
 
 
 // Set servo pwm values to nominal assuming 500~2500 range and 270 degree servos.
-void nominal_servo_pwm(const double & servo_range = 180, const int & min_pwm = 500, const int & max_pwm = 2500)
+void nominal_servo_pwm(const double & servo_range = 270, const int & min_pwm = 500, const int & max_pwm = 2500)
 {
   // Attach motors for assembly
   // Shoulders
@@ -174,7 +174,7 @@ void nominal_servo_pwm(const double & servo_range = 180, const int & min_pwm = 5
   FR_Shoulder.AssemblyInit(5, min_pwm, max_pwm);
   BL_Shoulder.AssemblyInit(8, min_pwm, max_pwm);
   BR_Shoulder.AssemblyInit(11, min_pwm, max_pwm);
-  
+
   //Elbows
   FL_Elbow.AssemblyInit(3, min_pwm, max_pwm);
   FR_Elbow.AssemblyInit(6, min_pwm, max_pwm);
@@ -188,7 +188,7 @@ void nominal_servo_pwm(const double & servo_range = 180, const int & min_pwm = 5
   BR_Wrist.AssemblyInit(13, min_pwm, max_pwm);
 
   // halfway for shoulder and elbow
-  int halfway_pulse = round(0.5 * (max_pwm - min_pwm) + min_pwm); // 1500ee
+  int halfway_pulse = round(0.5 * (max_pwm - min_pwm) + min_pwm); // 1500
   int shoulder_pulse = halfway_pulse; // 1500
   int elbow_pulse = halfway_pulse; // 1500
 
@@ -219,11 +219,11 @@ void run_sequence()
   // Move to Crouching Stance
   delay(2000);
   double f_shoulder_stance = 0.0;
-  double f_elbow_stance =  56.13; // + = vers l'avant
-  double f_wrist_stance = -45.84; // 0 = droite
+  double f_elbow_stance =  36.13;
+  double f_wrist_stance = -75.84;
   double r_shoulder_stance = 0.0;
-  double r_elbow_stance =  56.13;
-  double r_wrist_stance = -45.84;
+  double r_elbow_stance =  36.13;
+  double r_wrist_stance = -75.84;
   set_stance(f_shoulder_stance, f_elbow_stance, f_wrist_stance, r_shoulder_stance, r_elbow_stance, r_wrist_stance);
 }
 
@@ -238,20 +238,8 @@ void lie_calibration_sequence()
   // Move to Extended stance
   delay(2000);
   double shoulder_stance = 0.0;
-  double elbow_stance =  20.0;
-  double wrist_stance = -120.0;
-  set_stance(shoulder_stance, elbow_stance, wrist_stance, shoulder_stance, elbow_stance, wrist_stance);
-
-}
-
-void up_sequence()
-{
-
-  // Move to Extended stance
-  delay(2000);
-  double shoulder_stance = 0.0;
-  double elbow_stance =  60.0;
-  double wrist_stance = -40.0;
+  double elbow_stance =  90.0;
+  double wrist_stance = -170.3;
   set_stance(shoulder_stance, elbow_stance, wrist_stance, shoulder_stance, elbow_stance, wrist_stance);
 
 }
@@ -285,7 +273,7 @@ void setup()
     nominal_servo_pwm();
     // Prevent Servo Updates
     ESTOPPED = true;
-  } else 
+  } else
   {
 
     // IK - unused
@@ -293,29 +281,25 @@ void setup()
 
     // SERVOS: Pin, StandAngle, HomeAngle, Offset, LegType, JointType, min_pwm, max_pwm, min_pwm_angle, max_pwm_angle
     // Shoulders
-
-    // ROBOT POSE AT STARTUP  !!!
-    // **************************
     double shoulder_liedown = 0.0;
-    FL_Shoulder.Initialize(2, 90 + shoulder_liedown, 90, 0.0, FL, Shoulder, 1340, 1840, 60, 120);  // 0 | 135 mid - 0 out - 180 in
-    FR_Shoulder.Initialize(5, 90 - shoulder_liedown, 90, 0.0, FR, Shoulder, 1300, 1800, 60, 120); // 1 | 135 mid - 180 out - 0 in
-    BL_Shoulder.Initialize(8, 90 + shoulder_liedown, 90, 0.0, BL, Shoulder, 1200, 1700, 60, 120);  // 2 | 135 mid - 0 out - 180 in
-    BR_Shoulder.Initialize(11, 90 - shoulder_liedown, 90, 0.0, BR, Shoulder, 1300, 1800, 60, 120);  // 3 | 135 mid - 180 out - 0 in
-    
+    FL_Shoulder.Initialize(2, 135 + shoulder_liedown, 135, 0.0, FL, Shoulder, 1530, 1100, 135, 195);
+    FR_Shoulder.Initialize(5, 135 - shoulder_liedown, 135, 0.0, FR, Shoulder, 1530, 1920, 135, 195);
+    BL_Shoulder.Initialize(8, 135 + shoulder_liedown, 135, 0.0, BL, Shoulder, 1530, 1100, 135, 195);
+    BR_Shoulder.Initialize(11, 135 - shoulder_liedown, 135, 0.0, BR, Shoulder, 1500, 1900, 135, 195);
+
     //Elbows
-    double elbow_liedown = 25.0;
-    FL_Elbow.Initialize(3, elbow_liedown, 0, 0.0, FL, Elbow, 500, 2460, 180.0, 0.0);  // 4 | 135  mid - 0 in front - 180 behind
-    FR_Elbow.Initialize(6, elbow_liedown, 0, 0.0, FR, Elbow, 580, 2500, 0.0, 180.0); // 5 | 135  mid - 0 in behind - 180 in front
-    BL_Elbow.Initialize(9, elbow_liedown, 0, 0.0, BL, Elbow, 520, 2440, 180.0, 0.0);  // 6 | 135  mid - 0 in front - 180 behind
-    BR_Elbow.Initialize(12, elbow_liedown, 0, 0.0, BR, Elbow, 580, 2500, 0.0, 180.0); // 7 | 135  mid - 0 in behind - 180 in front
+    double elbow_liedown = 90.0;
+    FL_Elbow.Initialize(3, elbow_liedown, 0, 0.0, FL, Elbow, 1530, 2200, 0.0, 90.0);
+    FR_Elbow.Initialize(6, elbow_liedown, 0, 0.0, FR, Elbow, 1500, 850, 0.0, 90.0);
+    BL_Elbow.Initialize(9, elbow_liedown, 0, 0.0, BL, Elbow, 1550, 2230, 0.0, 90.0);
+    BR_Elbow.Initialize(12, elbow_liedown, 0, 0.0, BR, Elbow, 1500, 890, 0.0, 90.0);
 
     //Wrists
-    double wrist_liedown = -130;
-    FL_Wrist.Initialize(4, wrist_liedown, 0, 0.0, FL, Wrist, 600, 2240, 0.0, -130);  // 8 | 0 straight - 140 bent in
-    FR_Wrist.Initialize(7, wrist_liedown, 0, 0.0, FR, Wrist, 2340, 760, 0.0, -130); // 9 | 140 straight - 0 bent in
-    BL_Wrist.Initialize(10, wrist_liedown, 0, 0.0, BL, Wrist, 500, 2160, 0.0, -130); // 10 | 0 straight - 140 bent in
-    BR_Wrist.Initialize(13, wrist_liedown, 0, 0.0, BR, Wrist, 2500, 810, 0.0, -130); // 11 | 140 straight - 0 bent in
-
+    double wrist_liedown = -160.0;
+    FL_Wrist.Initialize(4, wrist_liedown, 0, 0.0, FL, Wrist, 1100, 1660, 0.0, -90.0);
+    FR_Wrist.Initialize(7, wrist_liedown, 0, 0.0, FR, Wrist, 1900, 1310, 0.0, -90.0);
+    BL_Wrist.Initialize(10, wrist_liedown, 0, 0.0, BL, Wrist, 1150, 1710, 0.0, -90.0);
+    BR_Wrist.Initialize(13, wrist_liedown, 0, 0.0, BR, Wrist, 1850, 1300, 0.0, -90.0);
     // Contact Sensors
     FL_sensor.Initialize(A9, 17);
     FR_sensor.Initialize(A8, 16);
@@ -329,20 +313,13 @@ void setup()
     if (spot_mode == STRAIGHT_LEGS)
     {
       straight_calibration_sequence();
-    } 
-    else if (spot_mode == LIEDOWN)
+    } else if (spot_mode == LIEDOWN)
     {
       lie_calibration_sequence();
-    }
-    else if (spot_mode == UP_LEGS)
-    {
-      up_sequence();
-    }
-    else if (spot_mode == UP_LEGS)
+    } else if (spot_mode == PERPENDICULAR_LEGS)
     {
       perpendicular_calibration_sequence();
-    }
-    else
+    } else
     {
       run_sequence();
     }
@@ -385,7 +362,7 @@ void loop()
 
   // Update Sensors
   update_sensors();
-  
+
   // Command Servos
   if (ros_serial.jointsInputIsActive())
   {
