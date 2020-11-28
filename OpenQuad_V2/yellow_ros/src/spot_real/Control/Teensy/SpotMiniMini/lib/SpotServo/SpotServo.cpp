@@ -3,8 +3,16 @@
 using namespace std;
 
 // Spot Full Constructor
-void SpotServo::Initialize(const int & servo_pin, const double & stand_angle_, const double & home_angle_, const double & offset_, const LegType & leg_type_, const JointType & joint_type_,
-						   const int & min_pwm_, const int & max_pwm_, const double & ang_min_pwm, const double & ang_max_pwm)
+void SpotServo::Initialize(const int & servo_pin,
+						   const double & stand_angle_,
+						   const double & home_angle_,
+						   const double & offset_,
+						   const LegType & leg_type_,
+						   const JointType & joint_type_,
+						   const int & min_pwm_,
+						   const int & max_pwm_,
+						   const double & ang_min_pwm,
+						   const double & ang_max_pwm)
 {
 	// use defaults for servo attach
 	AssemblyInit(servo_pin, min_pwm, max_pwm);
@@ -25,7 +33,8 @@ void SpotServo::Initialize(const int & servo_pin, const double & stand_angle_, c
 	last_actuated = millis();
 }
 
-void SpotServo::SetGoal(const double & goal_pose_, const double & desired_speed_, const bool & step_or_view_)
+void SpotServo::SetGoal(const double & goal_pose_, const double & desired_speed_,
+                        const bool & step_or_view_)
 {
 	// remove calibrating flag
 	calibrating = false;
@@ -39,8 +48,8 @@ void SpotServo::SetGoal(const double & goal_pose_, const double & desired_speed_
 		goal_pose = goal_pose_;
 		// Add Offset
 		goal_pose += offset;
-		
-		// TODO: ADD JOINT LIM 
+
+		// TODO: ADD JOINT LIM
 
 		desired_speed = desired_speed_;
 	}
