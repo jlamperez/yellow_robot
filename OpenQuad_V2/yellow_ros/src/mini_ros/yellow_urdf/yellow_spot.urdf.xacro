@@ -120,7 +120,7 @@
   <!-- HIP -->
   <xacro:mesh_link name="front_left_hip"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="0 0.075 0"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.209"
               c_xyz="0.015 0.01 -0.01"
               length="0.05"
@@ -141,7 +141,7 @@
   <!-- UPPER LEG -->
   <xacro:mesh_link name="front_left_upper_leg"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="-0.005 0.0175 -0.055"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.268"
               c_xyz="0 0.02 -0.05"
               length="0.081"
@@ -162,7 +162,7 @@
   <!-- LOWER LEG -->
   <xacro:mesh_link name="front_left_lower_leg"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="-0.01 0 -0.06"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.036"
               c_xyz="0 0 -0.06"
               length="0.022"
@@ -201,7 +201,7 @@
   <!-- HIP -->
   <xacro:mesh_link name="back_left_hip"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="0 0.075 0"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.209"
               c_xyz="0.015 0.01 -0.01"
               length="0.05"
@@ -223,7 +223,7 @@
   <!-- UPPER LEG -->
   <xacro:mesh_link name="back_left_upper_leg"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="-0.005 0.0175 -0.055"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.268"
               c_xyz="0 0.02 -0.05"
               length="0.081"
@@ -244,7 +244,7 @@
   <!-- LOWER LEG -->
   <xacro:mesh_link name="back_left_lower_leg"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="-0.01 0 -0.06"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.036"
               c_xyz="0 0 -0.06"
               length="0.022"
@@ -283,7 +283,7 @@
   <!-- HIP -->
   <xacro:mesh_link name="front_right_hip"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="0 -0.075 0"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.209"
               c_xyz="0.015 ${-0.01} -0.01"
               length="0.05"
@@ -304,7 +304,7 @@
   <!-- UPPER LEG -->
   <xacro:mesh_link name="front_right_upper_leg"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="-0.005 -0.0175 -0.055"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.268"
               c_xyz="0 ${-0.02} -0.05"
               length="0.081"
@@ -325,7 +325,7 @@
   <!-- LOWER LEG -->
   <xacro:mesh_link name="front_right_lower_leg"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="-0.01 0 -0.06"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.036"
               c_xyz="0 0 -0.06"
               length="0.022"
@@ -364,7 +364,7 @@
   <!-- HIP -->
   <xacro:mesh_link name="back_right_hip"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="0 -0.075 0"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.209"
               c_xyz="0.015 ${-0.01} -0.01"
               length="0.05"
@@ -385,7 +385,7 @@
   <!-- UPPER LEG -->
   <xacro:mesh_link name="back_right_upper_leg"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="-0.005 -0.0175 -0.055"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.268"
               c_xyz="0 ${-0.02} -0.05"
               length="0.081"
@@ -406,7 +406,7 @@
   <!-- LOWER LEG -->
   <xacro:mesh_link name="back_right_lower_leg"
               origin_rpy="0 0 -${pi/2}" origin_xyz="0 0 0"
-              i_rpy="0 0 0" i_xyz="-0.01 0 -0.06"
+              i_rpy="0 0 0" i_xyz="0 0 0"
               mass="0.036"
               c_xyz="0 0 -0.06"
               length="0.022"
