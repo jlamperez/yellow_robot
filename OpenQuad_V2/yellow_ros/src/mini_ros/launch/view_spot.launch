@@ -3,7 +3,7 @@
        and can be modified in diff_params.yaml -->
 
   <!-- load the urdf into the parameter server from the xacro file-->
-  <param name="robot_description" command="xacro '$(find mini_ros)/urdf/spot.urdf.xacro'" />
+  <param name="robot_description" command="xacro '$(find mini_ros)/yellow_urdf/yellow_spot.urdf.xacro'" />
 
   <!-- The robot_state_publisher reads the urdf from /robot_description parameter
        and listens to joint information on the /joint_states topic -->

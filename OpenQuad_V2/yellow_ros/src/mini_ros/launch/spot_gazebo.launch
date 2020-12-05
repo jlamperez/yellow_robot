@@ -1,6 +1,6 @@
 <launch>
   <!-- Load the urdf into the parameter server from the xacro file-->
-  <param name="robot_description" command="xacro '$(find mini_ros)/urdf/spot.urdf.xacro'" />
+  <param name="robot_description" command="xacro '$(find mini_ros)/yellow_urdf/yellow_spot.urdf.xacro'" />
 
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>

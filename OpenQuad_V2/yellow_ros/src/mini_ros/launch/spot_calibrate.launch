@@ -1,6 +1,6 @@
 <launch>
 <!-- Sensor Calibration Node -->
-<node name="servo_calibration" pkg="mini_ros" type="servo_calibration" output="screen"/>
+<node name="servo_calibration" pkg="mini_ros" type="servo_calibration.py" output="screen"/>
 
 <!-- Sensor Interface Node -->
 <node pkg="rosserial_python" type="serial_node.py" name="serial_node">
