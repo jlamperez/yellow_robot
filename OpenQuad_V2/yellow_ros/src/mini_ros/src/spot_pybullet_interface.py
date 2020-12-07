@@ -27,20 +27,20 @@ from spotmicro.Kinematics.SpotKinematics import SpotModel
 from spotmicro.GaitGenerator.Bezier import BezierGait
 
 # Controller Params
-STEPLENGTH_SCALE = 0.06
-Z_SCALE_CTRL = 0.12
-RPY_SCALE = 0.6
-SV_SCALE = 0.1
-CHPD_SCALE = 0.0005
-YAW_SCALE = 1.5
+STEPLENGTH_SCALE = rospy.get_param("STEPLENGTH_SCALE")
+Z_SCALE_CTRL = rospy.get_param("Z_SCALE_CTRL")
+RPY_SCALE = rospy.get_param("RPY_SCALE")
+SV_SCALE = rospy.get_param("SV_SCALE")
+CHPD_SCALE = rospy.get_param("CHPD_SCALE")
+YAW_SCALE = rospy.get_param("YAW_SCALE")
 
 # AGENT PARAMS
-CD_SCALE = 0.05
-SLV_SCALE = 0.05
-RESIDUALS_SCALE = 0.03
-Z_SCALE = 0.05
+CD_SCALE = rospy.get_param("CD_SCALE")
+SLV_SCALE = rospy.get_param("SLV_SCALE")
+RESIDUALS_SCALE = rospy.get_param("RESIDUALS_SCALE")
+Z_SCALE = rospy.get_param("Z_SCALE")
 # Filter actions
-alpha = 0.7
+alpha = rospy.get_param("alpha")
 # Added this to avoid filtering residuals
 # -1 for all
 
@@ -66,14 +66,14 @@ class SpotCommander():
         self.mini_cmd.motion = "Stop"
         self.mini_cmd.movement = "Stepping"
         # FIXED
-        self.BaseStepVelocity = 0.1
+        self.BaseStepVelocity = rospy.get_param("BaseStepVelocity")
         self.StepVelocity = self.BaseStepVelocity
         # Stock, use Bumpers to change
-        self.BaseSwingPeriod = 0.2
+        self.BaseSwingPeriod = rospy.get_param("Tswing")
         self.SwingPeriod = self.BaseSwingPeriod
         # Stock, use arrow pads to change
-        self.BaseClearanceHeight = 0.04
-        self.BasePenetrationDepth = 0.005
+        self.BaseClearanceHeight = rospy.get_param("BaseClearanceHeight")
+        self.BasePenetrationDepth = rospy.get_param("BasePenetrationDepth")
         self.ClearanceHeight = self.BaseClearanceHeight
         self.PenetrationDepth = self.BasePenetrationDepth
 
@@ -202,6 +202,7 @@ class SpotCommander():
             orn = np.array([0.0, 0.0, 0.0])
 
         # TODO: integrate into controller
+        # Always 0 is not integrated.
         self.ClearanceHeight += self.jb.updown * CHPD_SCALE
         self.PenetrationDepth += self.jb.leftright * CHPD_SCALE
 
@@ -237,6 +238,7 @@ class SpotCommander():
                                                 contacts, dt)
 
         joint_angles = self.spot.IK(orn, pos, self.T_bf)
+
         self.env.pass_joint_angles(joint_angles.reshape(-1))
         # Get External Observations
         # TODO
