@@ -1,24 +1,33 @@
 # MEASURE
 # COM to Shoulder
-shoulder_length: 0.055
+# shoulder_length: 0.055
+shoulder_length: 0.03
 # Shoulder to Elbow
-elbow_length: 0.10652
+# elbow_length: 0.10652
+elbow_length: 0.119
 # Elbow to Wrist
-wrist_length: 0.145
+# wrist_length: 0.145
+wrist_length: 0.127
 # Forward Hip Separation
-hip_x: 0.23
+# hip_x: 0.23
+hip_x: 0.27
 # Lateral Hip Separation
-hip_y: 0.075
+# hip_y: 0.075
+hip_y: 0.078
 
 # ADJUSTABLE
 # Stance Length
-foot_x: 0.23
+# foot_x: 0.23
+foot_x: 0.27
 # Stance Width
+# foot_y: 0.195
 foot_y: 0.185
 # Stance Height
-height: 0.20
+# height: 0.3
+height: 0.23
 # Adjust for balanced walk
-com_offset: 0.0
+# com_offset: -0.072
+com_offset: 0.01
 
 # Time Step
 dt: 0.001
@@ -28,12 +37,12 @@ Tswing: 0.2
 SwingPeriod_LIMITS: [0.1, 0.3]
 
 # Step Velocity (Using very low value as my main form of speed control is swing period)
-BaseStepVelocity: 0.001
+BaseStepVelocity: 0.01
 
 # Foot Clearance Height
-BaseClearanceHeight: 0.035
+BaseClearanceHeight: 0.04
 ClearanceHeight_LIMITS: [0.0, 0.04]
 
 # Foot Penetration Depth
-BasePenetrationDepth: 0.003
+BasePenetrationDepth: 0.005
 PenetrationDepth_LIMITS: [0.0, 0.02]
