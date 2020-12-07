@@ -27,6 +27,12 @@
 <!-- Spot Params -->
 <rosparam command="load" file="$(find mini_ros)/config/spot_params.yaml" />
 
+<!-- Policy Params -->
+<rosparam command="load" file="$(find mini_ros)/config/policy_params.yaml" />
+
+<!-- Joystick Params -->
+<rosparam command="load" file="$(find mini_ros)/config/joy_params.yaml" />
+
 <!-- Policy Node -->
 <node name="spot_pybullet" pkg="mini_ros" type="spot_pybullet_interface.py" output="screen"/>
 
