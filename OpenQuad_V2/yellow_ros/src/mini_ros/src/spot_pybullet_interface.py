@@ -14,7 +14,7 @@ import copy
 
 import sys
 
-import rospkg 
+import rospkg
 rospack = rospkg.RosPack()
 
 
@@ -108,7 +108,16 @@ class SpotCommander():
         self.state = self.env.reset()
 
         # Load Spot Model
-        self.spot = SpotModel()
+        self.spot = SpotModel(
+            shoulder_length=rospy.get_param("shoulder_length"),
+            elbow_length=rospy.get_param("elbow_length"),
+            wrist_length=rospy.get_param("wrist_length"),
+            hip_x=rospy.get_param("hip_x"),
+            hip_y=rospy.get_param("hip_y"),
+            foot_x=rospy.get_param("foot_x"),
+            foot_y=rospy.get_param("foot_y"),
+            height=rospy.get_param("height"),
+            com_offset=rospy.get_param("com_offset"))
 
         self.dt = self.env._time_step
 
